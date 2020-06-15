@@ -9,7 +9,7 @@ const router = Router()
 // admin or root
 router.post('/generateproduct', auth, async (req, res) => {
 
-  // if (req.user.userRole === 'admin' || req.user.userRole === 'root') {
+  if (req.user.userRole === 'admin' || req.user.userRole === 'root') {
     try {
 
       const { productName, productPrice, productCounts, productCost, productImage } = req.body
@@ -32,9 +32,31 @@ router.post('/generateproduct', auth, async (req, res) => {
     catch (e) {
       res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
     }
-  // } else {
-  //   res.status(500).json({ message: 'У вас нет прав доступа' })
-  // }
+  } else {
+    res.status(500).json({ message: 'У вас нет прав доступа' })
+  }
+}
+)
+
+
+router.post(`/productdelete`, auth, async (req, res) => {
+
+  if (req.user.userRole === 'admin' || req.user.userRole === 'root') {
+    try {
+
+      const { productDId } = req.body.productDId
+
+      const productCandidate = await Product.findOneAndDelete({ productDId })
+
+      res.status(201).json({ message: 'Товар удален' })
+    }
+
+    catch (e) {
+      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
+  } else {
+    res.status(500).json({ message: 'У вас нет прав доступа' })
+  }
 }
 )
 

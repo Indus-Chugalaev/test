@@ -6,33 +6,26 @@ const auth = require('../middleware/auth.middleware')
 const router = Router()
 
 
-router.post('/generatecart', auth, async (req, res) => {
+router.post('/add', auth, async (req, res) => {
 
   try {
 
     const { cartId, cartName, cartPrice, cartCount } = req.body
 
     // поиск по товару в корзинах
-    let users = await Cart.find({ cartName })
+    let cartFind = await Cart.find({ cartName })
 
 
     let ownerFilter = { owner: req.user.userId }
 
-    let ownerr = ownerFilter.owner
-
     // поиск в массиве по покупателю
-    let own = users.find(item => item.owner == ownerr)
+    let own = cartFind.find(item => item.owner == ownerFilter.owner)
 
     if (own) {
 
-
-      // let cartItem = await Cart.find({ _id: cartId })
-      // console.log(cartItem);
-
-
       own.cartCount = +own.cartCount + 1
-      own.cartSum = own.cartCount * own.cartPrice
-      let own2 = await Cart.findOneAndUpdate(
+      own.cartSum = +own.cartCount * +own.cartPrice
+      let plusCart = await Cart.findOneAndUpdate(
         { _id: own._id },
         { $set: { "cartCount": own.cartCount, "cartSum": own.cartSum } },
         { useFindAndModify: false }
@@ -42,13 +35,13 @@ router.post('/generatecart', auth, async (req, res) => {
 
     } else {
 
-      let cartSum = cartPrice * 1
+      let cartSum = +cartPrice * 1
       const cart = new Cart({
         cartId,
         cartName,
         cartPrice,
         cartCount,
-        cartSum: cartPrice * 1,
+        cartSum: +cartPrice * 1,
         owner: req.user.userId
       })
 
@@ -60,13 +53,13 @@ router.post('/generatecart', auth, async (req, res) => {
   }
 
   catch (e) {
-    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова1' })
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
 }
 )
 
 
-router.post('/generatecartp', auth, async (req, res) => {
+router.post('/plus', auth, async (req, res) => {
 
   try {
 
@@ -78,10 +71,9 @@ router.post('/generatecartp', auth, async (req, res) => {
     cartItem.cartCount = +cartCount + 1
     cartItem.cartSum = cartItem.cartCount * cartPrice
 
-    let cartItemP = await Cart.updateOne({ _id: cartId }, { $set: { "cartCount": cartItem.cartCount, "cartSum": cartItem.cartSum } })
+    let cartUpdate = await Cart.updateOne({ _id: cartId }, { $set: { "cartCount": cartItem.cartCount, "cartSum": cartItem.cartSum } })
 
     res.status(201).json({ message: 'Количество товара увеличено' })
-
 
   }
 
@@ -91,7 +83,7 @@ router.post('/generatecartp', auth, async (req, res) => {
 }
 )
 
-router.post('/generatecartm', auth, async (req, res) => {
+router.post('/minus', auth, async (req, res) => {
 
   try {
 
@@ -101,19 +93,17 @@ router.post('/generatecartm', auth, async (req, res) => {
     let cartItem = await Cart.find({ _id: cartId })
 
     cartItem.cartCount = +cartCount - 1
-    let counts = cartItem.cartCount
 
+    if ((+cartCount - 1) < 1) {
 
-    if (counts < 1) {
-
-      let cartIt = await Cart.findOneAndDelete({ _id: cartId })
+      let cartDelete = await Cart.findOneAndDelete({ _id: cartId })
 
       res.status(201).json({ message: 'Товар удален из корзины' })
 
     } else {
       cartItem.cartSum = cartItem.cartCount * cartPrice
 
-      let cartItemP = await Cart.updateOne({ _id: cartId }, { $set: { "cartCount": cartItem.cartCount, "cartSum": cartItem.cartSum } })
+      let cartUpdate = await Cart.updateOne({ _id: cartId }, { $set: { "cartCount": cartItem.cartCount, "cartSum": cartItem.cartSum } })
 
       res.status(201).json({ message: 'Количество товара уменьшено' })
     }
@@ -126,14 +116,14 @@ router.post('/generatecartm', auth, async (req, res) => {
 }
 )
 
-router.post('/generatecartd', auth, async (req, res) => {
+router.post('/delete', auth, async (req, res) => {
 
   try {
 
-    const { cartId, cartCount } = req.body
+    const { cartId } = req.body
 
 
-    let cartItem = await Cart.findOneAndDelete({ _id: cartId })
+    let cartDelete = await Cart.findOneAndDelete({ _id: cartId })
 
     res.status(201).json({ message: 'Товар удален из корзины' })
 
@@ -161,15 +151,15 @@ router.get('/', auth, async (req, res) => {
 
 })
 
-router.get('/:id', auth, async (req, res) => {
+// router.get('/:id', auth, async (req, res) => {
 
-  try {
-    const cart = await Cart.findById(req.params.id)
-    res.json(cart)
-  } catch (e) {
-    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
-  }
+//   try {
+//     const cart = await Cart.findById(req.params.id)
+//     res.json(cart)
+//   } catch (e) {
+//     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+//   }
 
-})
+// })
 
 module.exports = router

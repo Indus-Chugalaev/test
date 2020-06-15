@@ -13,9 +13,12 @@ export const DetailProduct = () => {
 
   const getProduct = useCallback(async () => {
     try {
-      const fetched = await request(`/api/product/${productId}`, 'GET', null, {
-        Authorization: `Bearer ${token}`
-      })
+      const fetched = await request(
+        `/api/product/${productId}`,
+        'GET',
+        null,
+        { Authorization: `Bearer ${token}` }
+      )
       setProduct(fetched)
     } catch (e) { }
   }, [token, productId, request])

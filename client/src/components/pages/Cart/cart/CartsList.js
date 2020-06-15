@@ -29,7 +29,7 @@ export const CartsList = ({ carts }) => {
   // start Plus
   function plusHandler(cart) {
 
-    const cartItemPlus = {
+    const cartItem = {
       cartId: cart.target.dataset.id,
       cartCount: cart.target.dataset.count,
       cartPrice: cart.target.dataset.price
@@ -37,15 +37,14 @@ export const CartsList = ({ carts }) => {
     const addPlusHandler = async () => {
 
       try {
-        const cartId = cartItemPlus.cartId
-        const cartCount = cartItemPlus.cartCount
-        const cartPrice = cartItemPlus.cartPrice
+        const cartId = cartItem.cartId
+        const cartCount = cartItem.cartCount
+        const cartPrice = cartItem.cartPrice
 
-        const data = await request('/api/cart/generatecartp', 'POST', { cartId, cartCount, cartPrice }, {
+        const data = await request('/api/cart/plus', 'POST', { cartId, cartCount, cartPrice }, {
           Authorization: `Bearer ${auth.token}`
         })
         message(data.message)
-        // history.push(`/carts`)
 
       } catch (e) {
         console.log('ошибка увеличения количества товара');
@@ -72,15 +71,11 @@ export const CartsList = ({ carts }) => {
         const cartCount = cartItemPlus.cartCount
         const cartPrice = cartItemPlus.cartPrice
 
-        const data = await request('/api/cart/generatecartm', 'POST', { cartId, cartCount, cartPrice }, {
+        const data = await request('/api/cart/minus', 'POST', { cartId, cartCount, cartPrice }, {
           Authorization: `Bearer ${auth.token}`
         })
         message(data.message)
-        // history.push(`/carts`)
-
-      } catch (e) {
-        console.log('ошибка уменьшения количества товара');
-      }
+      } catch (e) { }
     }
 
     addMinusHandler()
@@ -92,24 +87,19 @@ export const CartsList = ({ carts }) => {
   function deleteHandler(cart) {
 
     const cartItemPlus = {
-      cartId: cart.target.dataset.id,
-      cartCount: cart.target.dataset.count
+      cartId: cart.target.dataset.id
     }
     const addDeleteHandler = async () => {
 
       try {
         const cartId = cartItemPlus.cartId
-        // const cartCount = cartItemPlus.cartCount
 
-        const data = await request('/api/cart/generatecartd', 'POST', { cartId }, {
+        const data = await request('/api/cart/delete', 'POST', { cartId }, {
           Authorization: `Bearer ${auth.token}`
         })
         message(data.message)
-        // history.push(`/carts`)
 
-      } catch (e) {
-        console.log('ошибка удаления товара');
-      }
+      } catch (e) { }
     }
 
     addDeleteHandler()
@@ -137,7 +127,9 @@ export const CartsList = ({ carts }) => {
           <div className={s.item} key={cart._id}>
             <Link to={`/detailproduct/${cart.cartId}`}>   {cart.cartName}   -   {cart.cartPrice} руб
                     </Link>
-            <Link className={s.link}
+            <Link
+              to='#'
+              className={s.link}
               onClick={plusHandler}
               data-id={cart._id}
               data-count={cart.cartCount}
@@ -150,7 +142,9 @@ export const CartsList = ({ carts }) => {
             >
               {cart.cartCount} шт
                     </div>
-            <Link className={s.link}
+            <Link
+              to='#'
+              className={s.link}
               onClick={minusHandler}
               data-id={cart._id}
               data-count={cart.cartCount}
@@ -158,7 +152,9 @@ export const CartsList = ({ carts }) => {
             >
               -
                     </Link>
-            <Link className={s.link}
+            <Link
+              to='#'
+              className={s.link}
               onClick={deleteHandler}
               data-id={cart._id}
             >
