@@ -1,0 +1,7 @@
+.idea
+node_modules
+config
+
+/node_modules
+/config
+install.txt

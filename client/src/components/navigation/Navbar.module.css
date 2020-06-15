@@ -1,0 +1,19 @@
+.wrapper {
+   max-width: 1200px;
+   margin: auto;
+   text-align: right;
+}
+
+.link {
+   display: inline-block;
+   padding: 5px 20px 5px 20px;
+}
+
+.link a {
+   color: white;
+   font-size: 14px;
+}
+
+.link a.active {
+   color: gold;
+}

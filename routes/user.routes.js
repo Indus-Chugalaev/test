@@ -1,0 +1,72 @@
+const { Router } = require('express')
+const config = require('config')
+const shortid = require('shortid')
+const User = require('../models/User')
+const auth = require('../middleware/auth.middleware')
+const router = Router()
+
+
+// admin or root
+
+router.post('/generateuser', auth, async (req, res) => {
+
+  // if (req.user.userRole === 'admin' || req.user.userRole === 'root') {
+  try {
+
+    const { userName } = req.body
+
+    const userCandidate = await User.findOne({ userName })
+
+    if (userCandidate) {
+      return res.status(400).json({ message: 'Такой клиент уже существует' })
+    }
+
+    const user = new Client({
+      userName
+    })
+
+    await user.save()
+
+    res.status(201).json({ user })
+  }
+
+  catch (e) {
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+  // } else {
+  //   res.status(500).json({ message: 'У вас нет прав доступа' })
+  // }
+}
+)
+
+
+
+router.get('/', auth, async (req, res) => {
+  // if (req.user.userRole === 'admin' || req.user.userRole === 'root') {
+  try {
+    const users = await User.find({})
+    res.json(users)
+  } catch (e) {
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+  // } else {
+  //   res.status(500).json({ message: 'У вас нет прав доступа' })
+  // }
+
+
+})
+
+router.get('/:id', auth, async (req, res) => {
+  // if (req.user.userRole === 'admin' || req.user.userRole === 'root') {
+  try {
+    const user = await User.findById(req.params.id)
+    res.json(user)
+  } catch (e) {
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+  // } else {
+  //   res.status(500).json({ message: 'У вас нет прав доступа' })
+  // }
+})
+
+module.exports = router
