@@ -1,6 +1,0 @@
-{
-  "port": 5000,
-  "jwtSecret": "Secret",
-  "mongoUri": "mongodb://localhost:27017/instore-dev",
-  "baseUrl": "http://localhost:5000"
-}
