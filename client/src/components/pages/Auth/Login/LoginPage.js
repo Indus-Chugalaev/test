@@ -7,7 +7,12 @@ import './style.css'
 export const LoginPage = () => {
   const auth = useContext(AuthContext)
   const message = useMessage()
-  const { loading, request, error, clearError } = useHttp()
+  const {
+    // loading, 
+    request,
+    error,
+    clearError
+  } = useHttp()
   const [form, setForm] = useState({
     email: '', password: '', role: ''
   })
@@ -73,9 +78,7 @@ export const LoginPage = () => {
             className="a-button"
             onClick={loginHandler}
           >
-            <a>
-              Авторизоваться
-            </a>
+            Авторизоваться
           </button>
           <div className="b-button">
             <a href='/auth'>

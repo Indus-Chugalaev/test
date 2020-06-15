@@ -20,7 +20,8 @@ export const CreateAppointment = () => {
     appointmentTime: ''
   })
 
-  const [service, setServices] = useState([])
+  // const [service, setServices] = useState([])
+  const [setServices] = useState([])
   const { token } = useContext(AuthContext)
 
   const fetchServices = useCallback(async () => {
@@ -30,7 +31,7 @@ export const CreateAppointment = () => {
       })
       setServices(fetched)
     } catch (e) { }
-  }, [token, request])
+  }, [token, request, setServices])
 
   useEffect(() => {
     fetchServices()

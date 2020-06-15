@@ -3,7 +3,6 @@ import { useHttp } from '../../../hooks/http.hook'
 import { AuthContext } from '../../../context/AuthContext'
 import { Loader } from '../../../components/Loader'
 import { AppointmentsList } from './appointment/AppointmentsList'
-import { NavLink } from 'react-router-dom'
 
 export const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([])

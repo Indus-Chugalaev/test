@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import s from '../Product.module.css'
 
 import { useHttp } from '../../../../hooks/http.hook'
@@ -9,9 +9,11 @@ import { AuthContext } from '../../../../context/AuthContext'
 
 
 export const ProductsList = ({ products }) => {
-  const history = useHistory()
+  // const history = useHistory()
   const auth = useContext(AuthContext)
-  const { loading, request, error, clearError } = useHttp()
+  const {
+    // loading, 
+    request, error, clearError } = useHttp()
   const message = useMessage()
 
   useEffect(() => {
@@ -83,7 +85,9 @@ export const ProductsList = ({ products }) => {
                     (`${product.productImage}`) ?
                       `${product.productImage}` :
                       'https://whey-market.ru/image/cache/catalog/temp/5/ponents-com_jshopping-files-img_products-noimage-800x800.gif'
-                  } />
+                  }
+                    alt={`${product.productName}`}
+                  />
                   {/* {product.productImage} */}
                 </div>
                 <div>
