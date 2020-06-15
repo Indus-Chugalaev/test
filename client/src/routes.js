@@ -1,17 +1,15 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
+
 import { AuthPage } from './components/pages/Auth/Auth/AuthPage'
-import { Profile } from './components/pages/Profile/Profile'
-import { CreateUser } from './components/pages/Admin/CreateUser'
-import { UsersPage } from './components/pages/Admin/UsersPage'
-import { DetailUser } from './components/pages/Admin/DetailUser'
-import { RootPage } from './components/pages/Root/RootPage'
-import { ProductsPage } from './components/pages/Product/ProductsPage'
-import { DetailProduct } from './components/pages/Product/DetailProduct'
-import { CreateProduct } from './components/pages/Product/CreateProduct'
+import { LoginPage } from './components/pages/Auth/Login/LoginPage'
+
 import { CreateService } from './components/pages/Service/CreateService'
 import { ServicesPage } from './components/pages/Service/ServicesPage'
 import { DetailService } from './components/pages/Service/DetailService'
+import { ProductsPage } from './components/pages/Product/ProductsPage'
+import { DetailProduct } from './components/pages/Product/DetailProduct'
+import { CreateProduct } from './components/pages/Product/CreateProduct'
 import { CreateAppointment } from './components/pages/Appointment/CreateAppointment'
 import { AppointmentsPage } from './components/pages/Appointment/AppointmentsPage'
 import { DetailAppointment } from './components/pages/Appointment/DetailAppointment'
@@ -21,7 +19,12 @@ import { DetailOrder } from './components/pages/Order/DetailOrder'
 import { CreateCart } from './components/pages/Cart/CreateCart'
 import { CartsPage } from './components/pages/Cart/CartsPage'
 import { DetailCart } from './components/pages/Cart/DetailCart'
-import { LoginPage } from './components/pages/Auth/Login/LoginPage'
+
+import { CreateUser } from './components/pages/Admin/CreateUser'
+import { UsersPage } from './components/pages/Admin/UsersPage'
+import { DetailUser } from './components/pages/Admin/DetailUser'
+import { RootPage } from './components/pages/Root/RootPage'
+import { Profile } from './components/pages/Profile/Profile'
 
 export const useRoutes = isAuthenticated => {
   if (isAuthenticated) {
