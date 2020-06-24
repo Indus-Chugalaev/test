@@ -37,6 +37,22 @@ h1 {
 .input {
 }
 
+.check {
+   /* background-color: white; */
+}
+
+.check label {
+   color: white;
+}
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+   opacity: 1;
+   position: relative;
+   margin-right: 15px;
+   /* padding: 15px; */
+}
+
 .action {
    width: 100%;
    text-align: center;

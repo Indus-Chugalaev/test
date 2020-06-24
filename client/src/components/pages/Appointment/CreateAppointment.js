@@ -60,9 +60,6 @@ export const CreateAppointment = () => {
     } catch (e) { }
   }
 
-  console.log(auth);
-
-
   return (
     <div className="row">
       <div className="col s6 offset-s3">
@@ -132,7 +129,6 @@ export const CreateAppointment = () => {
             >
               Добавить запись в журнал
             </button>
-            {/* <ServicesList /> */}
           </div>
         </div>
       </div>

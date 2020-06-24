@@ -26,7 +26,7 @@ router.post(
         })
       }
 
-      const { email, password, role, userName, userLastName, userPhone } = req.body
+      const { email, password, role, userName, userLastName, userPhone, consent } = req.body
 
       const candidate = await User.findOne({ email })
 
@@ -34,15 +34,23 @@ router.post(
         return res.status(400).json({ message: 'Такой пользователь уже существует' })
       }
 
-      const hashedPassword = await bcrypt.hash(password, 12)
-      const user = new User({ email, password: hashedPassword, role, userName, userLastName, userPhone })
 
-      await user.save()
+      if (consent === true) {
 
-      res.status(201).json({ message: 'Пользователь создан' })
+        const hashedPassword = await bcrypt.hash(password, 12)
+        const user = new User({ email, password: hashedPassword, role, userName, userLastName, userPhone, consent })
+
+        await user.save()
+
+        res.status(201).json({ message: 'Пользователь создан' })
+      } else {
+
+        return res.status(400).json({ message: 'Подтвердите согласие с условиями использования' })
+
+      }
 
     } catch (e) {
-      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова. Проверьте заполненность всех полей' })
     }
   })
 

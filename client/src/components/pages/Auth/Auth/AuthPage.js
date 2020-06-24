@@ -3,20 +3,26 @@ import { useHttp } from '../../../../hooks/http.hook'
 import { useMessage } from '../../../../hooks/message.hook'
 // import { AuthContext } from '../../../../context/AuthContext'
 import { useHistory } from 'react-router-dom'
-import './style.css'
+import s from './Auth.module.css'
 
 export const AuthPage = () => {
   const history = useHistory()
   // const auth = useContext(AuthContext)
   const message = useMessage()
   const {
-    // loading, 
+    // loading,
     request,
     error,
     clearError
   } = useHttp()
   const [form, setForm] = useState({
-    email: '', password: '', userName: '', userLastName: '', userPhone: ''
+    email: '',
+    password: '',
+    userName: '',
+    userLastName: '',
+    userPhone: '',
+    role: '',
+    consent: false
   })
 
   useEffect(() => {
@@ -38,6 +44,18 @@ export const AuthPage = () => {
       message(data.message)
       history.push(`/login`)
     } catch (e) { }
+  }
+
+  const roleCheckbox = ({ target: { checked } }) => {
+    if (checked === true) {
+      form.role = 'individ'
+    } else {
+      form.role = ''
+    }
+  }
+
+  const consentCheckbox = ({ target: { checked } }) => {
+    form.consent = checked
   }
 
   return (
@@ -111,12 +129,41 @@ export const AuthPage = () => {
                 />
               </div>
 
+              <div className={s.check}>
+                <label>
+                  <input
+                    type="checkbox"
+                    value=""
+                    className={s.checkInput}
+                    onChange={roleCheckbox}
+                  />
+                  Мне нужен локальный аккаунт
+                  </label>
+              </div>
+
+              <div className={s.check}>
+                <label>
+                  <input
+                    type="checkbox"
+                    value=""
+                    className={s.checkInput}
+                    onChange={consentCheckbox}
+                  />
+                  Я согласен с условиями использования
+                  </label>
+              </div>
+
             </div>
           </div>
           <div className="action">
             <button
               className="a-button"
               onClick={registerHandler}
+            // disabled={
+            //   !form.userConsent
+            //   // ||
+            //   // loading
+            // }
             >
               Создать аккаунт
               </button>
