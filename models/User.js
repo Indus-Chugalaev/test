@@ -7,7 +7,7 @@ const schema = new Schema({
   userLastName: { type: String, required: true },
   userPhone: { type: Number, required: true },
   role: { type: String, default: 'client' },
-  consent: { type: String, required: true },
+  consent: { type: String, required: true }, // !rewiew
   date: { type: Date, default: Date.now },
 })
 

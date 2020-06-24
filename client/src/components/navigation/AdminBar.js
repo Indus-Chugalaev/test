@@ -6,7 +6,7 @@ import s from './Navbar.module.css'
 export const AdminBar = () => {
   const auth = useContext(AuthContext)
 
-  if (auth.userRole === 'admin' || auth.userRole === 'root') {
+  if (auth.userRole === 'admin' || auth.userRole === 'root' || auth.userRole === 'individ') {
     return (
       <>
         <div className={s.link}>
