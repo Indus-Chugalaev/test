@@ -3,6 +3,7 @@ import { useHttp } from '../../../hooks/http.hook'
 import { AuthContext } from '../../../context/AuthContext'
 import { useHistory } from 'react-router-dom'
 import { useMessage } from '../../../hooks/message.hook'
+import s from './Product.module.css'
 
 export const CreateProduct = () => {
   const message = useMessage()
@@ -41,7 +42,7 @@ export const CreateProduct = () => {
     } catch (e) { }
   }
   return (
-    <div className="row">
+    <div className={s.row}>
       <div className="col s6 offset-s3">
         <h1>Создание карточки товара</h1>
         <div className="card blue darken-1">
