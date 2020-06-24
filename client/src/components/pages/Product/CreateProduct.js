@@ -32,12 +32,12 @@ export const CreateProduct = () => {
 
   const addProductHandler = async () => {
     try {
-      const data = await request('/api/product/generateproduct', 'POST', { ...form }, {
+      const data = await request('/api/product/createproduct', 'POST', { ...form }, {
         Authorization: `Bearer ${auth.token}`
       })
       history.push(`/detailproduct/${data.product._id}`)
-      console.log({...form});
-      
+      console.log({ ...form });
+
     } catch (e) { }
   }
   return (

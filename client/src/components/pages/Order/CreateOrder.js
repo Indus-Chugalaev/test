@@ -4,6 +4,7 @@ import { AuthContext } from '../../../context/AuthContext'
 import { useHistory } from 'react-router-dom'
 import { useMessage } from '../../../hooks/message.hook'
 import { CartsList } from './order/CartsList'
+import s from './Order.module.css'
 
 export const CreateOrder = () => {
   const [carts, setCarts] = useState([])
@@ -68,7 +69,7 @@ export const CreateOrder = () => {
         }, 0)
       // console.log(cartsSum);
 
-      const data = await request('/api/order/generateorder', 'POST', {
+      const data = await request('/api/order/create-order', 'POST', {
         orderCity,
         orderStreet,
         orderHome,
@@ -84,7 +85,7 @@ export const CreateOrder = () => {
     } catch (e) { }
   }
   return (
-    <div className="row">
+    <div className={s.row}>
       <div className="col s6 offset-s3">
         <h1>Оформление заказа</h1>
         <div className="card blue darken-1">

@@ -32,7 +32,7 @@ export const CreateService = () => {
 
   const addServiceHandler = async () => {
     try {
-      const data = await request('/api/service/generateservice', 'POST', { ...form }, {
+      const data = await request('/api/service/create-service', 'POST', { ...form }, {
         Authorization: `Bearer ${auth.token}`
       })
       history.push(`/detailservice/${data.service._id}`)

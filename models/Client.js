@@ -1,8 +1,12 @@
 const { Schema, model, Types } = require('mongoose')
 
 const schema = new Schema({
-  email: { type: String, required: true, unique: true },
-  userName: { type: String, required: true },
+  userName: { type: String },
+  email: { type: String },
+  userLastName: { type: String },
+  userPhone: { type: Number },
+  date: { type: Date, default: Date.now },
+  owner: { type: Types.ObjectId, ref: 'User' }
 })
 
 module.exports = model('Client', schema)

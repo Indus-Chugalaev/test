@@ -7,7 +7,7 @@ const router = Router()
 
 
 // admin or root
-router.post('/generateappointment', auth, async (req, res) => {
+router.post('/create-appointment', auth, async (req, res) => {
 
   try {
 

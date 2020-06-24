@@ -53,7 +53,7 @@ export const CreateAppointment = () => {
 
   const addAppointmentHandler = async () => {
     try {
-      const data = await request('/api/appointment/generateappointment', 'POST', { ...form }, {
+      const data = await request('/api/appointment/create-appointment', 'POST', { ...form }, {
         Authorization: `Bearer ${auth.token}`
       })
       history.push(`/detailappointment/${data.appointment._id}`)

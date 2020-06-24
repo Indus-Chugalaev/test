@@ -28,7 +28,7 @@ export const CreateUser = () => {
 
   const addUserHandler = async () => {
     try {
-      const data = await request('/api/user/generateuser', 'POST', { ...form }, {
+      const data = await request('/api/user/createuser', 'POST', { ...form }, {
         Authorization: `Bearer ${auth.token}`
       })
       history.push(`/detailuser/${data.user._id}`)
@@ -65,7 +65,7 @@ export const CreateUser = () => {
               disabled={loading}
               onClick={addUserHandler}
             >
-              Создать услугу
+              Создать карточку клиента
             </button>
 
           </div>
