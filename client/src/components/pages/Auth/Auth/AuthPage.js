@@ -21,7 +21,7 @@ export const AuthPage = () => {
     userName: '',
     userLastName: '',
     userPhone: '',
-    role: '',
+    // role: '',
     consent: false
   })
 
@@ -46,13 +46,14 @@ export const AuthPage = () => {
     } catch (e) { }
   }
 
-  const roleCheckbox = ({ target: { checked } }) => {
-    if (checked === true) {
-      form.role = 'individ'
-    } else {
-      form.role = ''
-    }
-  }
+  // const roleCheckbox = ({ target: { checked } }) => {
+  //   if (checked === true) {
+  //     form.role = 'individ'
+  //   } else {
+  //     form.role = ''
+  //     delete form['role']
+  //   }
+  // }
 
   const consentCheckbox = ({ target: { checked } }) => {
     form.consent = checked
@@ -129,7 +130,7 @@ export const AuthPage = () => {
                 />
               </div>
 
-              <div className={s.check}>
+              {/* <div className={s.check}>
                 <label>
                   <input
                     type="checkbox"
@@ -139,7 +140,7 @@ export const AuthPage = () => {
                   />
                   Мне нужен локальный аккаунт
                   </label>
-              </div>
+              </div> */}
 
               <div className={s.check}>
                 <label>

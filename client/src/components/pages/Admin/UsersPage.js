@@ -2,25 +2,25 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useHttp } from '../../../hooks/http.hook'
 import { AuthContext } from '../../../context/AuthContext'
 import { Loader } from '../../../components/Loader'
-import { UsersList } from './users/UsersList'
+import { ClientsList } from './users/ClientsList'
 
 export const UsersPage = () => {
-  const [users, setUsers] = useState([])
+  const [clients, setClients] = useState([])
   const { loading, request } = useHttp()
   const { token } = useContext(AuthContext)
 
-  const fetchUsers = useCallback(async () => {
+  const fetchClients = useCallback(async () => {
     try {
       const fetched = await request('/api/user', 'GET', null, {
         Authorization: `Bearer ${token}`
       })
-      setUsers(fetched)
+      setClients(fetched)
     } catch (e) { }
   }, [token, request])
 
   useEffect(() => {
-    fetchUsers()
-  }, [fetchUsers])
+    fetchClients()
+  }, [fetchClients])
 
   if (loading) {
     return <Loader />
@@ -28,7 +28,7 @@ export const UsersPage = () => {
 
   return (
     <>
-      {!loading && <UsersList users={users} />}
+      {!loading && <ClientsList clients={clients} />}
     </>
   )
 }

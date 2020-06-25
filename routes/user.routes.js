@@ -18,18 +18,28 @@ router.post('/createuser', auth, async (req, res) => {
   ) {
     try {
 
-      const { userName } = req.body
 
-      const userCandidate = await User.findOne({ userName })
+      const {
+        clientName,
+        clientBirthDate,
+        clientPhone,
+        clientComment,
+      } = req.body
+
+      const userCandidate = await Client.findOne({ clientName })
 
       if (userCandidate) {
         return res.status(400).json({ message: 'Такой клиент уже существует' })
       }
 
       const user = new Client({
-        userName,
+        clientName,
+        clientBirthDate,
+        clientPhone,
+        clientComment,
         owner: req.user.userId
       })
+      console.log(user);
 
       await user.save()
 

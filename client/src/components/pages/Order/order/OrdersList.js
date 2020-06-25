@@ -6,17 +6,17 @@ export const OrdersList = ({ orders }) => {
   if (!orders.length) {
     return <div className={s.list}>
       <p className={s.center}>Заказов пока нет</p>
-      <div>
+      {/* <div>
         <NavLink to="/createorder">Создать заказ</NavLink>
-      </div>
+      </div> */}
     </div>
   }
 
   return (
     <div className={s.list}>
-      <div>
+      {/* <div>
         <NavLink to="/createorder">Создать заказ</NavLink>
-      </div>
+      </div> */}
 
       {orders.map((order, index) => {
         return (

@@ -1,10 +1,10 @@
 const { Schema, model, Types } = require('mongoose')
 
 const schema = new Schema({
-  userName: { type: String },
-  email: { type: String },
-  userLastName: { type: String },
-  userPhone: { type: Number },
+  clientName: { type: String, required: true },
+  clientBirthDate: { type: String },
+  clientPhone: { type: Number },
+  clientComment: { type: String },
   date: { type: Date, default: Date.now },
   owner: { type: Types.ObjectId, ref: 'User' }
 })

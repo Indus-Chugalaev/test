@@ -3,26 +3,26 @@ import { useParams } from 'react-router-dom'
 import { useHttp } from '../../../hooks/http.hook'
 import { AuthContext } from '../../../context/AuthContext'
 import { Loader } from '../../Loader'
-import { UserCard } from './users/UserCard'
+import { ClientCard } from './users/ClientCard'
 
 export const DetailUser = () => {
   const { token } = useContext(AuthContext)
   const { request, loading } = useHttp()
-  const [user, setUser] = useState(null)
-  const userId = useParams().id
+  const [client, setClient] = useState(null)
+  const clientId = useParams().id
 
-  const getUser = useCallback(async () => {
+  const getClient = useCallback(async () => {
     try {
-      const fetched = await request(`/api/user/${userId}`, 'GET', null, {
+      const fetched = await request(`/api/user/${clientId}`, 'GET', null, {
         Authorization: `Bearer ${token}`
       })
-      setUser(fetched)
+      setClient(fetched)
     } catch (e) { }
-  }, [token, userId, request])
+  }, [token, clientId, request])
 
   useEffect(() => {
-    getUser()
-  }, [getUser])
+    getClient()
+  }, [getClient])
 
   if (loading) {
     return <Loader />
@@ -30,7 +30,7 @@ export const DetailUser = () => {
 
   return (
     <>
-      {!loading && user && <UserCard user={user} />}
+      {!loading && client && <ClientCard client={client} />}
     </>
   )
 }

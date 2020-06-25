@@ -11,7 +11,10 @@ export const CreateUser = () => {
   const auth = useContext(AuthContext)
   const { loading, request, error, clearError } = useHttp()
   const [form, setForm] = useState({
-    userName: '',
+    clientName: '',
+    clientBirthDate: '',
+    clientPhone: '',
+    clientComment: '',
   })
 
   useEffect(() => {
@@ -46,12 +49,48 @@ export const CreateUser = () => {
 
               <div className="input-field">
                 <input
-                  placeholder="Введите имя клиента"
-                  id="userName"
+                  placeholder="Введите ФИО клиента"
+                  id="clientName"
                   type="text"
-                  name="userName"
+                  name="clientName"
                   className="yellow-input"
-                  value={form.userName}
+                  value={form.clientName}
+                  onChange={changeHandler}
+                />
+              </div>
+
+              <div className="input-field">
+                <input
+                  placeholder="Введите дату рождения клиента"
+                  id="clientBirthDate"
+                  type="text"
+                  name="clientBirthDate"
+                  className="yellow-input"
+                  value={form.clientBirthDate}
+                  onChange={changeHandler}
+                />
+              </div>
+
+              <div className="input-field">
+                <input
+                  placeholder="Введите номер телефона клиента"
+                  id="clientPhone"
+                  type="text"
+                  name="clientPhone"
+                  className="yellow-input"
+                  value={form.clientPhone}
+                  onChange={changeHandler}
+                />
+              </div>
+
+              <div className="input-field">
+                <input
+                  placeholder="Комментарии"
+                  id="clientComment"
+                  type="text"
+                  name="clientComment"
+                  className="yellow-input"
+                  value={form.clientComment}
                   onChange={changeHandler}
                 />
               </div>

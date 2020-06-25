@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import s from '../Admin.module.css'
 
-export const UsersList = ({ users }) => {
-  if (!users.length) {
+export const ClientsList = ({ clients }) => {
+  if (!clients.length) {
     return <p className={s.center}>Клиентов пока нет</p>
   }
 
@@ -11,19 +11,19 @@ export const UsersList = ({ users }) => {
     <div className={s.list}>
 
 
-      {users.map((user, index) => {
+      {clients.map((client, index) => {
         return (
-          <div className={s.item} key={user._id}>
+          <div className={s.item} key={client._id}>
             <div>
-              <Link to={`/detailuser/${user._id}`}>
+              <Link to={`/detailuser/${client._id}`}>
                 <div>
-                  {user.userName}
+                  {client.clientName}
                 </div>
                 <div>
-                  {user.email}
+                  {client.email}
                 </div>
                 <div>
-                  {user.userPhone}
+                  {client.clientPhone}
                 </div>
               </Link>
             </div>
