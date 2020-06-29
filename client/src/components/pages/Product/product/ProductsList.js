@@ -8,7 +8,7 @@ import { AuthContext } from '../../../../context/AuthContext'
 
 
 
-export const ProductsList = ({ products }) => {
+export const ProductsList = ({ props }) => {
   const auth = useContext(AuthContext)
   const { request, error, clearError } = useHttp()
   const message = useMessage()
@@ -21,10 +21,12 @@ export const ProductsList = ({ products }) => {
   useEffect(() => {
     window.M.updateTextFields()
   }, [])
+  // console.log(props.store);
+  // console.log(products.products);
 
 
 
-  if (!products.length) {
+  if (!props.store.state.products.length) {
     return <p className="center">Товаров пока нет</p>
   }
 
@@ -65,7 +67,7 @@ export const ProductsList = ({ products }) => {
 
   return (
     <div className={s.list}>
-      {products.map((product, index) => {
+      {props.store.state.products.map((product, index) => {
         return (
           <div className={s.item} key={product._id}>
             <Link to={`/detailproduct/${product._id}`}>

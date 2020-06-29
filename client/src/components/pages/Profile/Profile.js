@@ -5,59 +5,59 @@ import { AuthContext } from '../../../context/AuthContext'
 import { Loader } from '../../Loader'
 // import { ProfileInfo } from './profileInfo/ProfileInfo'
 
-export const Profile = () => {
+export const Profile = (props) => {
   const history = useHistory()
   const auth = useContext(AuthContext)
-
   const logoutHandler = event => {
     event.preventDefault()
     auth.logout()
     history.push('/')
   }
 
-  const { token } = useContext(AuthContext)
+  // const { token } = useContext(AuthContext)
   const { request, loading } = useHttp()
 
-  const [user, setUser] = useState([])
-  // const [setUser] = useState([])
-  const userId = user._id
+  // const [user, setUser] = useState([])
+  // // const [setUser] = useState([])
+  // const userId = user._id
 
-  const fetchUser = useCallback(async () => {
-    try {
-      const fetched = await request(
-        `/api/profile/${userId}`,
-        'GET',
-        null, {
-        Authorization: `Bearer ${token}`
-      })
-      setUser(fetched)
-    } catch (e) { }
-  }, [token, request, setUser, userId])
+  // const fetchUser = useCallback(async () => {
+  //   try {
+  //     const fetched = await request(
+  //       `/api/profile/${userId}`,
+  //       'GET',
+  //       null, {
+  //       Authorization: `Bearer ${token}`
+  //     })
+  //     setUser(fetched)
+  //   } catch (e) { }
+  // }, [token, request, setUser, userId])
 
 
 
-  useEffect(() => {
-    fetchUser()
-  }, [fetchUser])
+  // useEffect(() => {
+  //   fetchUser()
+  // }, [fetchUser])
 
   if (loading) {
     return <Loader />
   }
+  // console.log(props);
 
 
   return (
     <div>
       <div>
-        E-mail: {user.email}
+        E-mail: {props.store.state.user.email}
       </div>
       <div>
-        Имя: {user.userName}
+        Имя: {props.store.state.user.userName}
       </div>
       <div>
-        Фамилия: {user.userLastName}
+        Фамилия: {props.store.state.user.userLastName}
       </div>
       <div>
-        Номер телефона: {user.userPhone}
+        Номер телефона: {props.store.state.user.userPhone}
       </div>
       <div>
         <a href="/" onClick={logoutHandler}>Выйти</a>

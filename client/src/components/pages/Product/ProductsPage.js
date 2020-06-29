@@ -4,25 +4,31 @@ import { AuthContext } from '../../../context/AuthContext'
 import { Loader } from '../../../components/Loader'
 import { ProductsList } from './product/ProductsList'
 
-export const ProductsPage = () => {
-  const [products, setProducts] = useState([])
+export const ProductsPage = (props) => {
+  // const [products, setProducts] = useState([])
   const { loading, request } = useHttp()
-  const { token } = useContext(AuthContext)
+  // const { token } = useContext(AuthContext)
 
-  const fetchProducts = useCallback(async () => {
-    try {
-      const fetched = await request('/api/product', 'GET', null, {
-        Authorization: `Bearer ${token}`
-      })
-      setProducts(fetched)
-    } catch (e) { }
-  }, [token, request])
+  // const fetchProducts = useCallback(async () => {
+  //   try {
+  //     const fetched = await request('/api/product', 'GET', null, {
+  //       Authorization: `Bearer ${token}`
+  //     })
+  //     setProducts(fetched)
+  //   } catch (e) { }
+  // }, [token, request])
 
-  
 
-  useEffect(() => {
-    fetchProducts()
-  }, [fetchProducts])
+
+  // useEffect(() => {
+  //   fetchProducts()
+  // }, [fetchProducts])
+  // console.log(products);
+  // console.log(3);
+
+
+
+
 
   if (loading) {
     return <Loader />
@@ -30,7 +36,7 @@ export const ProductsPage = () => {
 
   return (
     <>
-      {!loading && <ProductsList products={products} />}
+      {!loading && <ProductsList props={props} />}
     </>
   )
 }

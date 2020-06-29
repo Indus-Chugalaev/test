@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// import state from './redux/state'
+
+// console.log(state());
+
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 serviceWorker.unregister();

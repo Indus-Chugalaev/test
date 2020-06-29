@@ -7,7 +7,7 @@ import { useMessage } from '../../../../hooks/message.hook'
 import { AuthContext } from '../../../../context/AuthContext'
 
 
-export const CartsList = ({ carts }) => {
+export const CartsList = ({ props }) => {
   // const history = useHistory()
   const auth = useContext(AuthContext)
   const {
@@ -108,11 +108,11 @@ export const CartsList = ({ carts }) => {
   // end Delete
 
 
-  if (!carts.length) {
+  if (!props.store.state.carts.length) {
     return <p className={s.center}>Корзина пуста</p>
   }
 
-  let cartsSum = carts
+  let cartsSum = props.store.state.carts
     .map((cart) => { return cart.cartSum })
     .reduce(function (sum, current) {
       return sum + current
@@ -122,7 +122,7 @@ export const CartsList = ({ carts }) => {
     <div className={s.list}>
 
 
-      {carts.map((cart, index) => {
+      {props.store.state.carts.map((cart, index) => {
         return (
           <div className={s.item} key={cart._id}>
             <Link to={`/detailproduct/${cart.cartId}`}>   {cart.cartName}   -   {cart.cartPrice} руб

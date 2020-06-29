@@ -4,23 +4,23 @@ import { AuthContext } from '../../../context/AuthContext'
 import { Loader } from '../../../components/Loader'
 import { CartsList } from './cart/CartsList'
 
-export const CartsPage = () => {
-  const [carts, setCarts] = useState([])
+export const CartsPage = (props) => {
+  // const [carts, setCarts] = useState([])
   const { loading, request } = useHttp()
-  const { token } = useContext(AuthContext)
+  // const { token } = useContext(AuthContext)
 
-  const fetchCarts = useCallback(async () => {
-    try {
-      const fetched = await request('/api/cart', 'GET', null, {
-        Authorization: `Bearer ${token}`
-      })
-      setCarts(fetched)
-    } catch (e) { }
-  }, [token, request])
+  // const fetchCarts = useCallback(async () => {
+  //   try {
+  //     const fetched = await request('/api/cart', 'GET', null, {
+  //       Authorization: `Bearer ${token}`
+  //     })
+  //     setCarts(fetched)
+  //   } catch (e) { }
+  // }, [token, request])
 
-  useEffect(() => {
-    fetchCarts()
-  }, [fetchCarts])
+  // useEffect(() => {
+  //   fetchCarts()
+  // }, [fetchCarts])
 
   if (loading) {
     return <Loader />
@@ -28,7 +28,7 @@ export const CartsPage = () => {
 
   return (
     <>
-      {!loading && <CartsList carts={carts} />}
+      {!loading && <CartsList props={props} />}
     </>
   )
 }

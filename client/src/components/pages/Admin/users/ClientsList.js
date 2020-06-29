@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import s from '../Admin.module.css'
 
-export const ClientsList = ({ clients }) => {
-  if (!clients.length) {
+export const ClientsList = ({ props }) => {
+  if (!props.store.state.clients.length) {
     return <p className={s.center}>Клиентов пока нет</p>
   }
 
@@ -11,7 +11,7 @@ export const ClientsList = ({ clients }) => {
     <div className={s.list}>
 
 
-      {clients.map((client, index) => {
+      {props.store.state.clients.map((client, index) => {
         return (
           <div className={s.item} key={client._id}>
             <div>

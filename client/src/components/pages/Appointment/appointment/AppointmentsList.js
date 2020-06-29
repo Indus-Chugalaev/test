@@ -2,8 +2,8 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import s from '../Appointment.module.css'
 
-export const AppointmentsList = ({ appointments }) => {
-  if (!appointments.length) {
+export const AppointmentsList = ({ props }) => {
+  if (!props.store.state.appointments.length) {
     return (
       <div className={s.list}><p className={s.center}> Журнал записи пока пуст</p>
         <div>
@@ -19,7 +19,7 @@ export const AppointmentsList = ({ appointments }) => {
         <NavLink to="/createappointment">Создать запись в журнале</NavLink>
       </div>
 
-      {appointments.map((appointment, index) => {
+      {props.store.state.appointments.map((appointment, index) => {
         return (
           <div className={s.item} key={appointment._id}>
             <Link to={`/detailappointment/${appointment._id}`}>

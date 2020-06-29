@@ -26,18 +26,19 @@ import { DetailUser } from './components/pages/Admin/DetailUser'
 import { RootPage } from './components/pages/Root/RootPage'
 import { Profile } from './components/pages/Profile/Profile'
 
-export const useRoutes = isAuthenticated => {
+export const useRoutes = (isAuthenticated, store) => {
   if (isAuthenticated) {
+
     return (
       <Switch>
         <Route path="/profile" exact>
-          <Profile />
+          <Profile store={store} />
         </Route>
         <Route path="/createuser" exact>
-          <CreateUser />
+          <CreateUser store={store} />
         </Route>
         <Route path="/users" exact>
-          <UsersPage />
+          <UsersPage store={store} />
         </Route>
         <Route path="/detailuser/:id">
           <DetailUser />
@@ -46,7 +47,7 @@ export const useRoutes = isAuthenticated => {
           <RootPage />
         </Route>
         <Route path="/products" exact>
-          <ProductsPage />
+          <ProductsPage store={store} />
         </Route>
         <Route path="/createproduct" exact>
           <CreateProduct />
@@ -55,7 +56,7 @@ export const useRoutes = isAuthenticated => {
           <DetailProduct />
         </Route>
         <Route path="/services" exact>
-          <ServicesPage />
+          <ServicesPage store={store} />
         </Route>
         <Route path="/createservice" exact>
           <CreateService />
@@ -64,7 +65,7 @@ export const useRoutes = isAuthenticated => {
           <DetailService />
         </Route>
         <Route path="/appointments" exact>
-          <AppointmentsPage />
+          <AppointmentsPage store={store} />
         </Route>
         <Route path="/createappointment" exact>
           <CreateAppointment />
@@ -73,7 +74,7 @@ export const useRoutes = isAuthenticated => {
           <DetailAppointment />
         </Route>
         <Route path="/orders" exact>
-          <OrdersPage />
+          <OrdersPage store={store} />
         </Route>
         <Route path="/createorder" exact>
           <CreateOrder />
@@ -82,7 +83,7 @@ export const useRoutes = isAuthenticated => {
           <DetailOrder />
         </Route>
         <Route path="/carts" exact>
-          <CartsPage />
+          <CartsPage store={store} />
         </Route>
         <Route path="/createcart" exact>
           <CreateCart />

@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import s from '../Order.module.css'
 
-export const OrdersList = ({ orders }) => {
-  if (!orders.length) {
+export const OrdersList = ({ props }) => {
+  if (!props.store.state.orders.length) {
     return <div className={s.list}>
       <p className={s.center}>Заказов пока нет</p>
       {/* <div>
@@ -18,7 +18,7 @@ export const OrdersList = ({ orders }) => {
         <NavLink to="/createorder">Создать заказ</NavLink>
       </div> */}
 
-      {orders.map((order, index) => {
+      {props.store.state.orders.map((order, index) => {
         return (
           <div className={s.item} key={order._id}>
             <div>
